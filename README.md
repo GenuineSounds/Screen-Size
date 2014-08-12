@@ -1,11 +1,15 @@
 ScreenSize
 ==========
 
+<<<<<<< HEAD
 [Genuine] Screen Size is a Minecraft mod that adds a gui to change the screen size windowed and full screen.
 
 License
 =======
 This computer software code ("the code") is ©2014 GenuineSounds ("the author") all rights reserved, and is licensed for use and redistribution under the “Don’t Be a Jerk” non-commercial care-free license.
+=======
+[Genuine] Screen Size is a Minecraft mod that adds a gui to change the screen size for both windowed and fullscreen.
+>>>>>>> origin/master
 
 Don't Be a Jerk
 ===============
