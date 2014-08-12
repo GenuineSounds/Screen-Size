@@ -15,6 +15,7 @@ import org.lwjgl.opengl.DisplayMode;
 
 public class GuiScreenSize extends GuiScreen {
 
+	private Method method;
 	private GuiTextField theGuiTextField;
 	private String errorMessage1 = "";
 	private String errorMessage2 = "";
@@ -195,24 +196,27 @@ public class GuiScreenSize extends GuiScreen {
 		return mode;
 	}
 
-	private void resizeMinecraft() {
-		Method method = null;
-		try {
-			method = Minecraft.class.getDeclaredMethod("a", int.class, int.class);
-		} catch (Exception e) {
+	private boolean resizeMinecraft() {
+		if (method == null) {
 			try {
-				method = Minecraft.class.getDeclaredMethod("resize", int.class, int.class);
-			} catch (Exception e1) {
-				e1.printStackTrace();
+				method = Minecraft.class.getDeclaredMethod("func_71370_a", int.class, int.class);
+			} catch (Exception e) {
+				try {
+					method = Minecraft.class.getDeclaredMethod("resize", int.class, int.class);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		}
 		if (method != null) {
 			method.setAccessible(true);
 			try {
 				method.invoke(mc, mc.displayWidth, mc.displayHeight);
+				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		return false;
 	}
 }
