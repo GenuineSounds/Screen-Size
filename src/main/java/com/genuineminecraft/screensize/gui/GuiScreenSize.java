@@ -1,8 +1,5 @@
-package com.genuineminecraft.screensize;
+package com.genuineminecraft.screensize.gui;
 
-import java.awt.Frame;
-import java.awt.Window;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import net.minecraft.client.Minecraft;
@@ -10,7 +7,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.StringTranslate;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -142,13 +138,6 @@ public class GuiScreenSize extends GuiScreen {
 		handle();
 	}
 
-	private void handle() {
-		if (changed && !this.theGuiTextField.getText().trim().isEmpty())
-			done.enabled = true;
-		else
-			done.enabled = false;
-	}
-
 	@Override
 	public void onGuiClosed() {
 		Keyboard.enableRepeatEvents(false);
@@ -157,6 +146,13 @@ public class GuiScreenSize extends GuiScreen {
 	@Override
 	public void updateScreen() {
 		this.theGuiTextField.updateCursorCounter();
+	}
+
+	private void handle() {
+		if (changed && !this.theGuiTextField.getText().trim().isEmpty())
+			done.enabled = true;
+		else
+			done.enabled = false;
 	}
 
 	public void setInGameScreenSize(int width, int height) {

@@ -3,8 +3,7 @@ package com.genuineminecraft.screensize;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 
-import org.lwjgl.input.Keyboard;
-
+import com.genuineminecraft.screensize.gui.GuiScreenSize;
 import com.genuineminecraft.screensize.key.ScreenSizeKeyBinding;
 
 import cpw.mods.fml.client.registry.ClientRegistry;

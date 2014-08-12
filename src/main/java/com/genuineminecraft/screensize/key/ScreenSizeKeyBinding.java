@@ -1,8 +1,8 @@
 package com.genuineminecraft.screensize.key;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.client.settings.KeyBinding;
+
+import org.lwjgl.input.Keyboard;
 
 public class ScreenSizeKeyBinding extends KeyBinding {
 
