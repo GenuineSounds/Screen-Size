@@ -38,24 +38,24 @@ public class GuiScreenSize extends GuiScreen {
 			switch (button.id) {
 			// Cancel
 			case 0:
-				this.mc.displayGuiScreen(parent);
+				mc.displayGuiScreen(parent);
 				break;
 			// Done
 			case 1:
-				String[] size = this.theGuiTextField.getText().split("[ -/xX]");
+				String[] size = theGuiTextField.getText().split("[ -/xX]");
 				if (size.length == 2) {
 					try {
 						int width = Integer.valueOf(size[0]);
 						int height = Integer.valueOf(size[1]);
 						if (width >= 400 && height >= 300) {
 							setInGameScreenSize(width, height);
-							this.mc.displayGuiScreen(parent);
+							mc.displayGuiScreen(parent);
 						} else {
-							errorMessage1 = "\2474Error:\247f Must be > or = 400x300.";
+							errorMessage1 = "\2474Error:\247f Must be > or = 400x300";
 							errorMessage2 = "(x can be anything on the numpad)";
 						}
 					} catch (NumberFormatException e) {
-						errorMessage1 = "\2474Error:\247f Input must be numbers.";
+						errorMessage1 = "\2474Error:\247f Input must be numbers";
 						errorMessage2 = "";
 					}
 				} else {
@@ -68,10 +68,10 @@ public class GuiScreenSize extends GuiScreen {
 				DisplayMode mode;
 				try {
 					mode = getMaxDisplayMode();
-					this.theGuiTextField.setText(Integer.toString(mode.getWidth()) + "x" + Integer.toString(mode.getHeight()));
+					theGuiTextField.setText(Integer.toString(mode.getWidth()) + "x" + Integer.toString(mode.getHeight()));
 				} catch (LWJGLException e) {
-					errorMessage1 = "\2474Error:\247f Something is wrong with LWJGL.";
-					errorMessage2 = "";
+					errorMessage1 = "\2474Error:\247f Something bad happened with LWJGL";
+					errorMessage2 = "Reverting for your protection";
 				}
 				break;
 			}
@@ -81,47 +81,47 @@ public class GuiScreenSize extends GuiScreen {
 	@Override
 	public void drawScreen(int par1, int par2, float par3) {
 		screenSize = Integer.toString(Display.getWidth()) + "x" + Integer.toString(Display.getHeight());
-		this.drawDefaultBackground();
-		this.drawCenteredString(this.fontRendererObj, "Set Screen Size", this.width / 2, this.height / 4 - 60 + 20, 16777215);
+		drawDefaultBackground();
+		drawCenteredString(fontRendererObj, "Set Screen Size", width / 2, height / 4 - 60 + 20, 16777215);
 		String string = "Enter new size - Like: 1280x720 or 1920*1080";
-		this.drawString(this.fontRendererObj, string, this.width / 2 - this.fontRendererObj.getStringWidth(string) / 2, this.height / 4 - 15, 10526880);
-		this.drawString(this.fontRendererObj, errorMessage1, this.width / 2 - 100, this.height / 4 + 27, 10526880);
-		this.drawString(this.fontRendererObj, errorMessage2, this.width / 2 - 100, this.height / 4 + 47, 10526880);
-		this.theGuiTextField.drawTextBox();
+		drawString(fontRendererObj, string, width / 2 - fontRendererObj.getStringWidth(string) / 2, height / 4 - 15, 10526880);
+		drawString(fontRendererObj, errorMessage1, width / 2 - 100, height / 4 + 27, 10526880);
+		drawString(fontRendererObj, errorMessage2, width / 2 - 100, height / 4 + 47, 10526880);
+		theGuiTextField.drawTextBox();
 		super.drawScreen(par1, par2, par3);
 	}
 
 	@Override
 	public void initGui() {
-		cancel = new GuiButton(0, this.width / 2 + 60 - 25, this.height / 4 + 132, 50, 20, I18n.format("gui.cancel"));
-		done = new GuiButton(1, this.width / 2 - 00 - 25, this.height / 4 + 132, 50, 20, I18n.format("gui.done"));
+		cancel = new GuiButton(0, width / 2 + 60 - 25, height / 4 + 132, 50, 20, I18n.format("gui.cancel"));
+		done = new GuiButton(1, width / 2 - 60 - 25, height / 4 + 132, 50, 20, I18n.format("gui.done"));
 		done.enabled = false;
-		max = new GuiButton(2, this.width / 2 - 60 - 25, this.height / 4 + 132, 50, 20, "Max");
+		max = new GuiButton(2, width / 2 - 25, height / 4 + 132, 50, 20, "Max");
 		Keyboard.enableRepeatEvents(true);
-		this.buttonList.clear();
-		this.buttonList.add(cancel);
-		this.buttonList.add(done);
-		this.buttonList.add(max);
-		this.theGuiTextField = new GuiTextField(this.fontRendererObj, this.width / 2 - 100, this.height / 4, 200, 20);
-		this.theGuiTextField.setText(screenSize);
-		this.theGuiTextField.setTextColor(0x555555);
+		buttonList.clear();
+		buttonList.add(cancel);
+		buttonList.add(done);
+		buttonList.add(max);
+		theGuiTextField = new GuiTextField(fontRendererObj, width / 2 - 100, height / 4, 200, 20);
+		theGuiTextField.setText(screenSize);
+		theGuiTextField.setTextColor(0x555555);
 	}
 
 	@Override
 	public void keyTyped(char par1, int par2) {
 		if (par1 == 13 /* Enter */)
-			this.actionPerformed(done);
+			actionPerformed(done);
 		if (theGuiTextField.isFocused()) {
 			if (par1 == 27 /* Escape */)
-				this.theGuiTextField.setFocused(false);
-			this.theGuiTextField.textboxKeyTyped(par1, par2);
-			this.theGuiTextField.setTextColor(0xFFFFFF);
+				theGuiTextField.setFocused(false);
+			theGuiTextField.textboxKeyTyped(par1, par2);
+			theGuiTextField.setTextColor(0xFFFFFF);
 			changed = true;
 		} else {
 			if (par1 == 27 /* Escape */)
-				this.actionPerformed(cancel);
+				actionPerformed(cancel);
 			theGuiTextField.setText(presets[par1 % presets.length]);
-			this.theGuiTextField.setTextColor(0xFFFFFF);
+			theGuiTextField.setTextColor(0xFFFFFF);
 			changed = true;
 		}
 		handle();
@@ -130,10 +130,10 @@ public class GuiScreenSize extends GuiScreen {
 	@Override
 	public void mouseClicked(int par1, int par2, int button) {
 		super.mouseClicked(par1, par2, button);
-		this.theGuiTextField.mouseClicked(par1, par2, button);
+		theGuiTextField.mouseClicked(par1, par2, button);
 		if (theGuiTextField.isFocused() && !changed) {
-			this.theGuiTextField.setTextColor(0xFFFFFF);
-			this.theGuiTextField.setText("");
+			theGuiTextField.setTextColor(0xFFFFFF);
+			theGuiTextField.setText("");
 			changed = true;
 		}
 		handle();
@@ -146,11 +146,11 @@ public class GuiScreenSize extends GuiScreen {
 
 	@Override
 	public void updateScreen() {
-		this.theGuiTextField.updateCursorCounter();
+		theGuiTextField.updateCursorCounter();
 	}
 
 	private void handle() {
-		if (changed && !this.theGuiTextField.getText().trim().isEmpty())
+		if (changed && !theGuiTextField.getText().trim().isEmpty())
 			done.enabled = true;
 		else
 			done.enabled = false;
