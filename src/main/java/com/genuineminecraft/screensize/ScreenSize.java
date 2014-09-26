@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 
 import com.genuineminecraft.screensize.gui.GuiScreenSize;
-import com.genuineminecraft.screensize.key.ScreenSizeKeyBinding;
+import com.genuineminecraft.screensize.key.KeyBindingScreenSize;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -25,12 +25,12 @@ public class ScreenSize {
 	public static ScreenSize instance;
 	public static final String MODID = "ScreenSize";
 	public static final String NAME = "Screen Size";
-	public static final String VERSION = "1.7.10-r2";
+	public static final String VERSION = "1.7.10-r3";
 	public static KeyBinding screenSizeKey;
 
 	@EventHandler
 	public void pre(FMLPreInitializationEvent event) {
-		screenSizeKey = new ScreenSizeKeyBinding();
+		screenSizeKey = new KeyBindingScreenSize();
 		ClientRegistry.registerKeyBinding(screenSizeKey);
 	}
 

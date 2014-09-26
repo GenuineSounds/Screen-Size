@@ -36,11 +36,9 @@ public class GuiScreenSize extends GuiScreen {
 	public void actionPerformed(GuiButton button) {
 		if (button.enabled) {
 			switch (button.id) {
-			// Cancel
 				case 0:
 					mc.displayGuiScreen(parent);
 					break;
-				// Done
 				case 1:
 					String[] size = theGuiTextField.getText().split("[ -/xX]");
 					if (size.length == 2) {
@@ -63,7 +61,6 @@ public class GuiScreenSize extends GuiScreen {
 						errorMessage2 = "(x can be anything on the numpad)";
 					}
 					break;
-				// Max
 				case 2:
 					DisplayMode mode;
 					try {
@@ -109,16 +106,16 @@ public class GuiScreenSize extends GuiScreen {
 
 	@Override
 	public void keyTyped(char par1, int par2) {
-		if (par1 == 13 /* Enter */)
+		if (par1 == 13) // Enter
 			actionPerformed(done);
 		if (theGuiTextField.isFocused()) {
-			if (par1 == 27 /* Escape */)
+			if (par1 == 27) // Escape
 				theGuiTextField.setFocused(false);
 			theGuiTextField.textboxKeyTyped(par1, par2);
 			theGuiTextField.setTextColor(0xFFFFFF);
 			changed = true;
 		} else {
-			if (par1 == 27 /* Escape */)
+			if (par1 == 27) // Escape
 				actionPerformed(cancel);
 			theGuiTextField.setText(presets[par1 % presets.length]);
 			theGuiTextField.setTextColor(0xFFFFFF);
