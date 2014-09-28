@@ -29,7 +29,7 @@ public class GuiScreenSize extends GuiScreen {
 
 	public GuiScreenSize(GuiScreen parent) {
 		this.parent = parent;
-		screenSize = Integer.toString(Display.getWidth()) + "x" + Integer.toString(Display.getHeight());
+		this.screenSize = Integer.toString(Display.getWidth()) + "x" + Integer.toString(Display.getHeight());
 	}
 
 	@Override
@@ -37,38 +37,38 @@ public class GuiScreenSize extends GuiScreen {
 		if (button.enabled) {
 			switch (button.id) {
 				case 0:
-					mc.displayGuiScreen(parent);
+					this.mc.displayGuiScreen(this.parent);
 					break;
 				case 1:
-					String[] size = theGuiTextField.getText().split("[ -/xX]");
+					String[] size = this.theGuiTextField.getText().split("[ -/xX]");
 					if (size.length == 2) {
 						try {
 							int width = Integer.valueOf(size[0]);
 							int height = Integer.valueOf(size[1]);
 							if (width >= 400 && height >= 300) {
-								setInGameScreenSize(width, height);
-								mc.displayGuiScreen(parent);
+								this.setInGameScreenSize(width, height);
+								this.mc.displayGuiScreen(this.parent);
 							} else {
-								errorMessage1 = "\2474Error:\247f Must be > or = 400x300";
-								errorMessage2 = "(x can be anything on the numpad)";
+								this.errorMessage1 = "\2474Error:\247f Must be > or = 400x300";
+								this.errorMessage2 = "(x can be anything on the numpad)";
 							}
 						} catch (NumberFormatException e) {
-							errorMessage1 = "\2474Error:\247f Input must be numbers";
-							errorMessage2 = "";
+							this.errorMessage1 = "\2474Error:\247f Input must be numbers";
+							this.errorMessage2 = "";
 						}
 					} else {
-						errorMessage1 = "\2474Error:\247f Input must look like 800x600";
-						errorMessage2 = "(x can be anything on the numpad)";
+						this.errorMessage1 = "\2474Error:\247f Input must look like 800x600";
+						this.errorMessage2 = "(x can be anything on the numpad)";
 					}
 					break;
 				case 2:
 					DisplayMode mode;
 					try {
-						mode = getMaxDisplayMode();
-						theGuiTextField.setText(Integer.toString(mode.getWidth()) + "x" + Integer.toString(mode.getHeight()));
+						mode = this.getMaxDisplayMode();
+						this.theGuiTextField.setText(Integer.toString(mode.getWidth()) + "x" + Integer.toString(mode.getHeight()));
 					} catch (LWJGLException e) {
-						errorMessage1 = "\2474Error:\247f Something bad happened with LWJGL";
-						errorMessage2 = "Reverting for your protection";
+						this.errorMessage1 = "\2474Error:\247f Something bad happened with LWJGL";
+						this.errorMessage2 = "Reverting for your protection";
 					}
 					break;
 			}
@@ -77,95 +77,15 @@ public class GuiScreenSize extends GuiScreen {
 
 	@Override
 	public void drawScreen(int par1, int par2, float par3) {
-		screenSize = Integer.toString(Display.getWidth()) + "x" + Integer.toString(Display.getHeight());
-		drawDefaultBackground();
-		drawCenteredString(fontRendererObj, "Set Screen Size", width / 2, height / 4 - 60 + 20, 16777215);
+		this.screenSize = Integer.toString(Display.getWidth()) + "x" + Integer.toString(Display.getHeight());
+		this.drawDefaultBackground();
+		this.drawCenteredString(this.fontRendererObj, "Set Screen Size", this.width / 2, this.height / 4 - 60 + 20, 16777215);
 		String string = "Enter new size - Like: 1280x720 or 1920*1080";
-		drawString(fontRendererObj, string, width / 2 - fontRendererObj.getStringWidth(string) / 2, height / 4 - 15, 10526880);
-		drawString(fontRendererObj, errorMessage1, width / 2 - 100, height / 4 + 27, 10526880);
-		drawString(fontRendererObj, errorMessage2, width / 2 - 100, height / 4 + 47, 10526880);
-		theGuiTextField.drawTextBox();
+		this.drawString(this.fontRendererObj, string, this.width / 2 - this.fontRendererObj.getStringWidth(string) / 2, this.height / 4 - 15, 10526880);
+		this.drawString(this.fontRendererObj, this.errorMessage1, this.width / 2 - 100, this.height / 4 + 27, 10526880);
+		this.drawString(this.fontRendererObj, this.errorMessage2, this.width / 2 - 100, this.height / 4 + 47, 10526880);
+		this.theGuiTextField.drawTextBox();
 		super.drawScreen(par1, par2, par3);
-	}
-
-	@Override
-	public void initGui() {
-		cancel = new GuiButton(0, width / 2 + 60 - 25, height / 4 + 132, 50, 20, I18n.format("gui.cancel"));
-		done = new GuiButton(1, width / 2 - 60 - 25, height / 4 + 132, 50, 20, I18n.format("gui.done"));
-		done.enabled = false;
-		max = new GuiButton(2, width / 2 - 25, height / 4 + 132, 50, 20, "Max");
-		Keyboard.enableRepeatEvents(true);
-		buttonList.clear();
-		buttonList.add(cancel);
-		buttonList.add(done);
-		buttonList.add(max);
-		theGuiTextField = new GuiTextField(fontRendererObj, width / 2 - 100, height / 4, 200, 20);
-		theGuiTextField.setText(screenSize);
-		theGuiTextField.setTextColor(0x555555);
-	}
-
-	@Override
-	public void keyTyped(char par1, int par2) {
-		if (par1 == 13) // Enter
-			actionPerformed(done);
-		if (theGuiTextField.isFocused()) {
-			if (par1 == 27) // Escape
-				theGuiTextField.setFocused(false);
-			theGuiTextField.textboxKeyTyped(par1, par2);
-			theGuiTextField.setTextColor(0xFFFFFF);
-			changed = true;
-		} else {
-			if (par1 == 27) // Escape
-				actionPerformed(cancel);
-			theGuiTextField.setText(presets[par1 % presets.length]);
-			theGuiTextField.setTextColor(0xFFFFFF);
-			changed = true;
-		}
-		handle();
-	}
-
-	@Override
-	public void mouseClicked(int par1, int par2, int button) {
-		super.mouseClicked(par1, par2, button);
-		theGuiTextField.mouseClicked(par1, par2, button);
-		if (theGuiTextField.isFocused() && !changed) {
-			theGuiTextField.setTextColor(0xFFFFFF);
-			theGuiTextField.setText("");
-			changed = true;
-		}
-		handle();
-	}
-
-	@Override
-	public void onGuiClosed() {
-		Keyboard.enableRepeatEvents(false);
-	}
-
-	@Override
-	public void updateScreen() {
-		theGuiTextField.updateCursorCounter();
-	}
-
-	private void handle() {
-		if (changed && !theGuiTextField.getText().trim().isEmpty())
-			done.enabled = true;
-		else
-			done.enabled = false;
-	}
-
-	public void setInGameScreenSize(int width, int height) {
-		try {
-			DisplayMode mode = getDisplayMode(width, height);
-			Display.setDisplayMode(mode);
-			mc.displayWidth = Display.getWidth();
-			mc.displayHeight = Display.getHeight();
-			resizeMinecraft();
-			Display.update();
-		} catch (LWJGLException e) {}
-	}
-
-	private DisplayMode getMaxDisplayMode() throws LWJGLException {
-		return getDisplayMode(1000000, 1000000);
 	}
 
 	private DisplayMode getDisplayMode(int width, int height) throws LWJGLException {
@@ -192,27 +112,107 @@ public class GuiScreenSize extends GuiScreen {
 		return mode;
 	}
 
+	private DisplayMode getMaxDisplayMode() throws LWJGLException {
+		return this.getDisplayMode(1000000, 1000000);
+	}
+
+	private void handle() {
+		if (this.changed && !this.theGuiTextField.getText().trim().isEmpty())
+			this.done.enabled = true;
+		else
+			this.done.enabled = false;
+	}
+
+	@Override
+	public void initGui() {
+		this.cancel = new GuiButton(0, this.width / 2 + 60 - 25, this.height / 4 + 132, 50, 20, I18n.format("gui.cancel"));
+		this.done = new GuiButton(1, this.width / 2 - 60 - 25, this.height / 4 + 132, 50, 20, I18n.format("gui.done"));
+		this.done.enabled = false;
+		this.max = new GuiButton(2, this.width / 2 - 25, this.height / 4 + 132, 50, 20, "Max");
+		Keyboard.enableRepeatEvents(true);
+		this.buttonList.clear();
+		this.buttonList.add(this.cancel);
+		this.buttonList.add(this.done);
+		this.buttonList.add(this.max);
+		this.theGuiTextField = new GuiTextField(this.fontRendererObj, this.width / 2 - 100, this.height / 4, 200, 20);
+		this.theGuiTextField.setText(this.screenSize);
+		this.theGuiTextField.setTextColor(0x555555);
+	}
+
+	@Override
+	public void keyTyped(char par1, int par2) {
+		if (par1 == 13) // Enter
+			this.actionPerformed(this.done);
+		if (this.theGuiTextField.isFocused()) {
+			if (par1 == 27) // Escape
+				this.theGuiTextField.setFocused(false);
+			this.theGuiTextField.textboxKeyTyped(par1, par2);
+			this.theGuiTextField.setTextColor(0xFFFFFF);
+			this.changed = true;
+		} else {
+			if (par1 == 27) // Escape
+				this.actionPerformed(this.cancel);
+			this.theGuiTextField.setText(this.presets[par1 % this.presets.length]);
+			this.theGuiTextField.setTextColor(0xFFFFFF);
+			this.changed = true;
+		}
+		this.handle();
+	}
+
+	@Override
+	public void mouseClicked(int par1, int par2, int button) {
+		super.mouseClicked(par1, par2, button);
+		this.theGuiTextField.mouseClicked(par1, par2, button);
+		if (this.theGuiTextField.isFocused() && !this.changed) {
+			this.theGuiTextField.setTextColor(0xFFFFFF);
+			this.theGuiTextField.setText("");
+			this.changed = true;
+		}
+		this.handle();
+	}
+
+	@Override
+	public void onGuiClosed() {
+		Keyboard.enableRepeatEvents(false);
+	}
+
 	private boolean resizeMinecraft() {
-		if (method == null) {
+		if (this.method == null) {
 			try {
-				method = Minecraft.class.getDeclaredMethod("func_71370_a", int.class, int.class);
+				this.method = Minecraft.class.getDeclaredMethod("func_71370_a", int.class, int.class);
 			} catch (Exception e) {
 				try {
-					method = Minecraft.class.getDeclaredMethod("resize", int.class, int.class);
+					this.method = Minecraft.class.getDeclaredMethod("resize", int.class, int.class);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		}
-		if (method != null) {
-			method.setAccessible(true);
+		if (this.method != null) {
+			this.method.setAccessible(true);
 			try {
-				method.invoke(mc, mc.displayWidth, mc.displayHeight);
+				this.method.invoke(this.mc, this.mc.displayWidth, this.mc.displayHeight);
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		return false;
+	}
+
+	public void setInGameScreenSize(int width, int height) {
+		try {
+			DisplayMode mode = this.getDisplayMode(width, height);
+			Display.setDisplayMode(mode);
+			this.mc.displayWidth = Display.getWidth();
+			this.mc.displayHeight = Display.getHeight();
+			this.resizeMinecraft();
+			Display.update();
+		} catch (LWJGLException e) {}
+	}
+
+	@Override
+	public void updateScreen() {
+		this.theGuiTextField.updateCursorCounter();
 	}
 }
