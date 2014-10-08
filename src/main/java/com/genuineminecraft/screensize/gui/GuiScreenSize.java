@@ -52,7 +52,8 @@ public class GuiScreenSize extends GuiScreen {
 								this.errorMessage1 = "\2474Error:\247f Must be > or = 400x300";
 								this.errorMessage2 = "(x can be anything on the numpad)";
 							}
-						} catch (NumberFormatException e) {
+						}
+						catch (NumberFormatException e) {
 							this.errorMessage1 = "\2474Error:\247f Input must be numbers";
 							this.errorMessage2 = "";
 						}
@@ -66,7 +67,8 @@ public class GuiScreenSize extends GuiScreen {
 					try {
 						mode = this.getMaxDisplayMode();
 						this.theGuiTextField.setText(Integer.toString(mode.getWidth()) + "x" + Integer.toString(mode.getHeight()));
-					} catch (LWJGLException e) {
+					}
+					catch (LWJGLException e) {
 						this.errorMessage1 = "\2474Error:\247f Something bad happened with LWJGL";
 						this.errorMessage2 = "Reverting for your protection";
 					}
@@ -180,10 +182,12 @@ public class GuiScreenSize extends GuiScreen {
 		if (this.method == null) {
 			try {
 				this.method = Minecraft.class.getDeclaredMethod("func_71370_a", int.class, int.class);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				try {
 					this.method = Minecraft.class.getDeclaredMethod("resize", int.class, int.class);
-				} catch (Exception e1) {
+				}
+				catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
@@ -193,7 +197,8 @@ public class GuiScreenSize extends GuiScreen {
 			try {
 				this.method.invoke(this.mc, this.mc.displayWidth, this.mc.displayHeight);
 				return true;
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -208,7 +213,8 @@ public class GuiScreenSize extends GuiScreen {
 			this.mc.displayHeight = Display.getHeight();
 			this.resizeMinecraft();
 			Display.update();
-		} catch (LWJGLException e) {}
+		}
+		catch (LWJGLException e) {}
 	}
 
 	@Override
