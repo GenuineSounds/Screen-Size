@@ -67,6 +67,8 @@ public class GuiScreenSize extends GuiScreen {
 					try {
 						mode = this.getMaxDisplayMode();
 						this.theGuiTextField.setText(Integer.toString(mode.getWidth()) + "x" + Integer.toString(mode.getHeight()));
+						this.theGuiTextField.setTextColor(0xFFFFFF);
+						changed = true;
 					}
 					catch (LWJGLException e) {
 						this.errorMessage1 = "\2474Error:\247f Something bad happened with LWJGL";
