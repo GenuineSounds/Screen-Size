@@ -7,7 +7,7 @@ import org.lwjgl.input.Keyboard;
 public class KeyBindingScreenSize extends KeyBinding {
 
 	public KeyBindingScreenSize() {
-		super("Screen Size", Keyboard.KEY_ADD, "Opens the screen size gui");
+		super("Screen Size", Keyboard.KEY_ADD, "Screen size gui");
 	}
 
 	@Override
