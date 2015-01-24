@@ -25,7 +25,7 @@ public class ScreenSize {
 	public static ScreenSize instance;
 	public static final String MODID = "ScreenSize";
 	public static final String NAME = "Screen Size";
-	public static final String VERSION = "1.7.10-r3";
+	public static final String VERSION = "1.7.10-1.0.5";
 	public static KeyBinding screenSizeKey;
 
 	@EventHandler
