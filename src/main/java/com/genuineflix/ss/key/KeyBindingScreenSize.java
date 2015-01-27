@@ -1,4 +1,4 @@
-package com.genuineminecraft.screensize.key;
+package com.genuineflix.ss.key;
 
 import net.minecraft.client.settings.KeyBinding;
 
