@@ -29,12 +29,6 @@ public class ScreenSize {
 	public static KeyBinding screenSizeKey;
 
 	@EventHandler
-	public void pre(final FMLPreInitializationEvent event) {
-		ScreenSize.screenSizeKey = new KeyBindingScreenSize();
-		ClientRegistry.registerKeyBinding(ScreenSize.screenSizeKey);
-	}
-
-	@EventHandler
 	public void init(final FMLInitializationEvent event) {
 		FMLCommonHandler.instance().bus().register(this);
 	}
@@ -44,5 +38,11 @@ public class ScreenSize {
 	public void keyPress(final KeyInputEvent keyInput) {
 		if (ScreenSize.screenSizeKey.getIsKeyPressed())
 			Minecraft.getMinecraft().displayGuiScreen(new GuiScreenSize(Minecraft.getMinecraft().currentScreen));
+	}
+
+	@EventHandler
+	public void pre(final FMLPreInitializationEvent event) {
+		ScreenSize.screenSizeKey = new KeyBindingScreenSize();
+		ClientRegistry.registerKeyBinding(ScreenSize.screenSizeKey);
 	}
 }
