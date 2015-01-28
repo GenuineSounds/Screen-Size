@@ -1,6 +1,6 @@
 ScreenSize
 ==========
-[Genuine] Screen Size is a Minecraft mod that adds a gui to change the screen size windowed and full screen.
+ScreenSize is a Minecraft mod that adds a GUI to change the screen size (resolution of the game) for both windowed and full screen modes.
 
 License
 =======
