@@ -55,10 +55,10 @@ public class GuiScreenSize extends GuiScreen {
 								errorMessage2 = "(x can be anything on the numpad)";
 							}
 						}
-					catch (final NumberFormatException e) {
-						errorMessage1 = "\2474Error:\247f Input must be numbers";
-						errorMessage2 = "";
-					}
+						catch (final NumberFormatException e) {
+							errorMessage1 = "\2474Error:\247f Input must be numbers";
+							errorMessage2 = "";
+						}
 					else {
 						errorMessage1 = "\2474Error:\247f Input must look like 800x600";
 						errorMessage2 = "(x can be anything on the numpad)";
@@ -183,14 +183,14 @@ public class GuiScreenSize extends GuiScreen {
 			try {
 				method = Minecraft.class.getDeclaredMethod("func_71370_a", int.class, int.class);
 			}
-		catch (final Exception e) {
-			try {
-				method = Minecraft.class.getDeclaredMethod("resize", int.class, int.class);
+			catch (final Exception e) {
+				try {
+					method = Minecraft.class.getDeclaredMethod("resize", int.class, int.class);
+				}
+				catch (final Exception e1) {
+					e1.printStackTrace();
+				}
 			}
-			catch (final Exception e1) {
-				e1.printStackTrace();
-			}
-		}
 		if (method != null) {
 			method.setAccessible(true);
 			try {
