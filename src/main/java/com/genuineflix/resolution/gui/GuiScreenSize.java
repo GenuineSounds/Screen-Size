@@ -1,4 +1,4 @@
-package com.genuineflix.ss.gui;
+package com.genuineflix.resolution.gui;
 
 import java.lang.reflect.Method;
 

@@ -1,10 +1,10 @@
-package com.genuineflix.ss;
+package com.genuineflix.resolution;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 
-import com.genuineflix.ss.gui.GuiScreenSize;
-import com.genuineflix.ss.key.KeyBindingScreenSize;
+import com.genuineflix.resolution.gui.GuiScreenSize;
+import com.genuineflix.resolution.key.KeyBindingScreenSize;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -24,8 +24,8 @@ public class ScreenSize {
 	@Instance(ScreenSize.MODID)
 	public static ScreenSize instance;
 	public static final String MODID = "ScreenSize";
-	public static final String NAME = "Screen Size";
-	public static final String VERSION = "1.0.8";
+	public static final String NAME = "ScreenSize";
+	public static final String VERSION = "1.0.11";
 	public static KeyBinding screenSizeKey;
 
 	@EventHandler

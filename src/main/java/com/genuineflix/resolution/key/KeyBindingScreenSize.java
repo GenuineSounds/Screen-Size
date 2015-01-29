@@ -1,4 +1,4 @@
-package com.genuineflix.ss.key;
+package com.genuineflix.resolution.key;
 
 import net.minecraft.client.settings.KeyBinding;
 
