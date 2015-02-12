@@ -25,9 +25,7 @@ public class GuiScreenSize extends GuiScreen {
 	private GuiButton cancel;
 	private GuiButton max;
 	private boolean changed = false;
-	String[] presets = new String[] {
-			"2560x1440", "1920x1080", "1680x1050", "1600x900", "1280x720", "1024x768", "800x600"
-	};
+	String[] presets = new String[] { "2560x1440", "1920x1080", "1680x1050", "1600x900", "1280x720", "1024x768", "800x600" };
 
 	public GuiScreenSize(final GuiScreen parent) {
 		this.parent = parent;
