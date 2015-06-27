@@ -25,9 +25,8 @@ public class GuiScreenSize extends GuiScreen {
 	private GuiButton cancel;
 	private GuiButton max;
 	private boolean changed = false;
-	String[] presets = new String[] {
-			"2560x1440", "1920x1080", "1680x1050", "1600x900", "1280x720", "1024x768", "800x600"
-	};
+	String[] presets = new String[] { "2560x1440", "1920x1080", "1680x1050", "1600x900", "1280x720", "1024x768",
+			"800x600" };
 
 	public GuiScreenSize(final GuiScreen parent) {
 		this.parent = parent;
@@ -38,45 +37,46 @@ public class GuiScreenSize extends GuiScreen {
 	public void actionPerformed(final GuiButton button) {
 		if (button.enabled)
 			switch (button.id) {
-				case 0:
-					mc.displayGuiScreen(parent);
-					break;
-				case 1:
-					final String[] size = theGuiTextField.getText().split("[ -/xX]");
-					if (size.length == 2)
-						try {
-							final int width = Integer.valueOf(size[0]);
-							final int height = Integer.valueOf(size[1]);
-							if (width >= 400 && height >= 300) {
-								setInGameScreenSize(width, height);
-								mc.displayGuiScreen(parent);
-							} else {
-								errorMessage1 = "\2474Error:\247f Must be > or = 400x300";
-								errorMessage2 = "(x can be anything on the numpad)";
-							}
-						}
-						catch (final NumberFormatException e) {
-							errorMessage1 = "\2474Error:\247f Input must be numbers";
-							errorMessage2 = "";
-						}
-					else {
-						errorMessage1 = "\2474Error:\247f Input must look like 800x600";
-						errorMessage2 = "(x can be anything on the numpad)";
-					}
-					break;
-				case 2:
-					DisplayMode mode;
+			case 0:
+				mc.displayGuiScreen(parent);
+				break;
+			case 1:
+				final String[] size = theGuiTextField.getText().split("[ -/xX]");
+				if (size.length == 2)
 					try {
-						mode = getMaxDisplayMode();
-						theGuiTextField.setText(Integer.toString(mode.getWidth()) + "x" + Integer.toString(mode.getHeight()));
-						theGuiTextField.setTextColor(0xFFFFFF);
-						changed = true;
+						final int width = Integer.valueOf(size[0]);
+						final int height = Integer.valueOf(size[1]);
+						if (width >= 400 && height >= 300) {
+							setInGameScreenSize(width, height);
+							mc.displayGuiScreen(parent);
+						} else {
+							errorMessage1 = "\2474Error:\247f Must be > or = 400x300";
+							errorMessage2 = "(x can be anything on the numpad)";
+						}
 					}
-					catch (final LWJGLException e) {
-						errorMessage1 = "\2474Error:\247f Something bad happened with LWJGL";
-						errorMessage2 = "Reverting for your protection";
+					catch (final NumberFormatException e) {
+						errorMessage1 = "\2474Error:\247f Input must be numbers";
+						errorMessage2 = "";
 					}
-					break;
+				else {
+					errorMessage1 = "\2474Error:\247f Input must look like 800x600";
+					errorMessage2 = "(x can be anything on the numpad)";
+				}
+				break;
+			case 2:
+				DisplayMode mode;
+				try {
+					mode = getMaxDisplayMode();
+					theGuiTextField.setText(Integer.toString(mode.getWidth()) + "x"
+							+ Integer.toString(mode.getHeight()));
+					theGuiTextField.setTextColor(0xFFFFFF);
+					changed = true;
+				}
+				catch (final LWJGLException e) {
+					errorMessage1 = "\2474Error:\247f Something bad happened with LWJGL";
+					errorMessage2 = "Reverting for your protection";
+				}
+				break;
 			}
 	}
 
@@ -86,7 +86,8 @@ public class GuiScreenSize extends GuiScreen {
 		drawDefaultBackground();
 		drawCenteredString(fontRendererObj, "Set Screen Size", width / 2, height / 4 - 60 + 20, 16777215);
 		final String string = "Enter new size - Like: 1280x720 or 1920*1080";
-		drawString(fontRendererObj, string, width / 2 - fontRendererObj.getStringWidth(string) / 2, height / 4 - 15, 10526880);
+		drawString(fontRendererObj, string, width / 2 - fontRendererObj.getStringWidth(string) / 2, height / 4 - 15,
+				10526880);
 		drawString(fontRendererObj, errorMessage1, width / 2 - 100, height / 4 + 27, 10526880);
 		drawString(fontRendererObj, errorMessage2, width / 2 - 100, height / 4 + 47, 10526880);
 		theGuiTextField.drawTextBox();
@@ -105,9 +106,11 @@ public class GuiScreenSize extends GuiScreen {
 					mode = dm;
 				}
 			for (final DisplayMode dm : Display.getAvailableDisplayModes())
-				if (Math.abs(dm.getWidth() - width) == x && Math.abs(dm.getHeight() - height) == y && mode.getBitsPerPixel() <= dm.getBitsPerPixel() && mode.getFrequency() <= dm.getFrequency())
+				if (Math.abs(dm.getWidth() - width) == x && Math.abs(dm.getHeight() - height) == y
+						&& mode.getBitsPerPixel() <= dm.getBitsPerPixel() && mode.getFrequency() <= dm.getFrequency())
 					mode = dm;
-		} else if (width > Display.getDesktopDisplayMode().getWidth() || height > Display.getDesktopDisplayMode().getHeight())
+		} else if (width > Display.getDesktopDisplayMode().getWidth()
+				|| height > Display.getDesktopDisplayMode().getHeight())
 			mode = Display.getDesktopDisplayMode();
 		else
 			mode = new DisplayMode(width, height);
