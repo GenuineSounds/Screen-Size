@@ -23,7 +23,7 @@ public class ScreenSize {
 	public static final String MODID = "screen-size";
 	public static final String NAME = "Screen-Size";
 	public static final String URL = "http://genuine.ninja/screen-size/";
-	public static final String VERSION = "1.1.0";
+	public static final String VERSION = "1.2.0";
 	public static KeyBinding screenSizeKey;
 	public static boolean enabled = true;
 
