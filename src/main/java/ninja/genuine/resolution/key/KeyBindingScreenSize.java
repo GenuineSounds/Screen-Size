@@ -1,8 +1,8 @@
 package ninja.genuine.resolution.key;
 
-import net.minecraft.client.settings.KeyBinding;
-
 import org.lwjgl.input.Keyboard;
+
+import net.minecraft.client.settings.KeyBinding;
 
 public class KeyBindingScreenSize extends KeyBinding {
 

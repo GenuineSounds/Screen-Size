@@ -1,6 +1,11 @@
 package ninja.genuine.resolution.gui;
 
-import java.lang.reflect.Method;
+import java.io.IOException;
+
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -8,14 +13,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-
 public class GuiScreenSize extends GuiScreen {
 
-	private Method method;
 	private GuiTextField theGuiTextField;
 	private String errorMessage1 = "";
 	private String errorMessage2 = "";
@@ -121,7 +120,6 @@ public class GuiScreenSize extends GuiScreen {
 			done.enabled = false;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui() {
 		cancel = new GuiButton(0, width / 2 + 60 - 25, height / 4 + 132, 50, 20, I18n.format("gui.cancel"));
@@ -133,7 +131,7 @@ public class GuiScreenSize extends GuiScreen {
 		buttonList.add(cancel);
 		buttonList.add(done);
 		buttonList.add(max);
-		theGuiTextField = new GuiTextField(fontRendererObj, width / 2 - 100, height / 4, 200, 20);
+		theGuiTextField = new GuiTextField(3, fontRendererObj, width / 2 - 100, height / 4, 200, 20);
 		theGuiTextField.setText(screenSize);
 		theGuiTextField.setTextColor(0x555555);
 	}
@@ -159,7 +157,7 @@ public class GuiScreenSize extends GuiScreen {
 	}
 
 	@Override
-	public void mouseClicked(final int par1, final int par2, final int button) {
+	public void mouseClicked(final int par1, final int par2, final int button) throws IOException {
 		super.mouseClicked(par1, par2, button);
 		theGuiTextField.mouseClicked(par1, par2, button);
 		if (theGuiTextField.isFocused() && !changed) {
@@ -175,36 +173,13 @@ public class GuiScreenSize extends GuiScreen {
 		Keyboard.enableRepeatEvents(false);
 	}
 
-	private boolean resizeMinecraft() {
-		if (method == null)
-			try {
-				method = Minecraft.class.getDeclaredMethod("func_71370_a", int.class, int.class);
-			} catch (final Exception e) {
-				try {
-					method = Minecraft.class.getDeclaredMethod("resize", int.class, int.class);
-				} catch (final Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-		if (method != null) {
-			method.setAccessible(true);
-			try {
-				method.invoke(mc, mc.displayWidth, mc.displayHeight);
-				return true;
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return false;
-	}
-
 	public void setInGameScreenSize(final int width, final int height) {
 		try {
 			final DisplayMode mode = getDisplayMode(width, height);
 			Display.setDisplayMode(mode);
 			mc.displayWidth = Display.getWidth();
 			mc.displayHeight = Display.getHeight();
-			resizeMinecraft();
+			Minecraft.getMinecraft().resize(width, height);
 			Display.update();
 		} catch (final LWJGLException e) {}
 	}

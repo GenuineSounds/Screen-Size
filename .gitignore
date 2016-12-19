@@ -45,3 +45,5 @@ bin
 eclipse
 build
 run
+*.launch
+*.html
