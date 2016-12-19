@@ -1,31 +1,27 @@
 buildscript {
 	repositories {
-		mavenCentral()
-		maven {
-			name = "forge"
-			url = "http://files.minecraftforge.net/maven"
-		}
-		maven {
-			name = "sonatype"
-			url = "https://oss.sonatype.org/content/repositories/snapshots/"
-		}
+		jcenter()
+		maven { url = "http://files.minecraftforge.net/maven" }
 	}
 	dependencies {
-		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+		classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
 	}
 }
 
-apply plugin: 'forge'
+apply plugin: 'net.minecraftforge.gradle.forge'
 
-archivesBaseName = "ScreenSize"
+archivesBaseName = "Screen-Size"
 
-group = "ninja.genuine"
+group = "ninja.genuine.screen-size"
 ext.revision = 'git rev-list --count HEAD'.execute().text.trim()
-version = "1.7.10-1.1.0-${revision}"
+version = "1.11-1.2.0-${revision}"
+
+sourceCompatibility = targetCompatibility = "1.8"
 
 minecraft {
-	version = "1.7.10-10.13.4.1614-1.7.10"
-	runDir = "eclipse"
+	version = "1.11-13.19.1.2189"
+	runDir = "run"
+	mappings = "snapshot_20161217"
 }
 
 dependencies {
@@ -34,23 +30,21 @@ dependencies {
 processResources {
 	inputs.property "version", project.version
 	inputs.property "mcversion", project.minecraft.version
+
 	from(sourceSets.main.resources.srcDirs) {
 		include 'mcmod.info'
 		expand 'version':project.version, 'mcversion':project.minecraft.version
 	}
+
 	from(sourceSets.main.resources.srcDirs) {
 		exclude 'mcmod.info'
 	}
 }
 
-task deobfJar(type: Jar, dependsOn: 'classes') {
-	from sourceSets.main.output
-	classifier = 'dev'
-}
-
-task sourceJar(type: Jar, dependsOn: 'sourceMainJava') {
-	from sourceSets.main.allSource
-	classifier = 'src'
+allprojects {
+	tasks.withType(Javadoc) {
+		options.addStringOption('Xdoclint:none', '-quiet')
+	}
 }
 
 task javadocJar(type: Jar, dependsOn: 'javadoc') {
@@ -58,4 +52,4 @@ task javadocJar(type: Jar, dependsOn: 'javadoc') {
 	classifier = 'javadoc'
 }
 
-tasks.build.dependsOn deobfJar, sourceJar
+tasks.build.dependsOn sourceJar
