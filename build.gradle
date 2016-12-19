@@ -14,14 +14,14 @@ archivesBaseName = "Screen-Size"
 
 group = "ninja.genuine.screen-size"
 ext.revision = 'git rev-list --count HEAD'.execute().text.trim()
-version = "1.11-1.2.0-${revision}"
+version = "1.10.2-1.2.0-${revision}"
 
 sourceCompatibility = targetCompatibility = "1.8"
 
 minecraft {
-	version = "1.11-13.19.1.2189"
+	version = "1.10.2-12.18.3.2185"
 	runDir = "run"
-	mappings = "snapshot_20161217"
+	mappings = "snapshot_20161111"
 }
 
 dependencies {
