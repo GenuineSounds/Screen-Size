@@ -4,9 +4,9 @@ import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.settings.KeyBinding;
 
-public class KeyBindingScreenSize extends KeyBinding {
+public class KeyBindingConfig extends KeyBinding {
 
-	public KeyBindingScreenSize() {
+	public KeyBindingConfig() {
 		super("Screen Size", Keyboard.KEY_ADD, "Screen size gui");
 	}
 
