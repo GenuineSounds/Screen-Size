@@ -1,4 +1,4 @@
-package ninja.genuine.resolution.key;
+package ninja.genuine.screensize.key;
 
 import org.lwjgl.input.Keyboard;
 

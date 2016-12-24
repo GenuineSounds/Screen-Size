@@ -1,4 +1,4 @@
-package ninja.genuine.resolution.gui;
+package ninja.genuine.screensize.gui;
 
 import java.io.IOException;
 

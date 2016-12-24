@@ -1,4 +1,4 @@
-package ninja.genuine.resolution;
+package ninja.genuine.screensize;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -12,15 +12,15 @@ import net.minecraftforge.fml.common.event.FMLModDisabledEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
-import ninja.genuine.resolution.gui.GuiScreenSize;
-import ninja.genuine.resolution.key.KeyBindingConfig;
+import ninja.genuine.screensize.gui.GuiScreenSize;
+import ninja.genuine.screensize.key.KeyBindingConfig;
 
 @Mod(modid = ScreenSize.MODID, name = ScreenSize.NAME, version = ScreenSize.VERSION, clientSideOnly = true, updateJSON = ScreenSize.URL + "update.json", canBeDeactivated = true, useMetadata = true)
 public class ScreenSize {
 
 	@Instance(ScreenSize.MODID)
 	public static ScreenSize instance;
-	public static final String MODID = "screen-size";
+	public static final String MODID = "screensize";
 	public static final String NAME = "Screen-Size";
 	public static final String URL = "http://genuine.ninja/screen-size/";
 	public static final String VERSION = "1.2.0";

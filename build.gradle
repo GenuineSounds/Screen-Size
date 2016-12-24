@@ -12,16 +12,16 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 archivesBaseName = "Screen-Size"
 
-group = "ninja.genuine.screen-size"
+group = "ninja.genuine.screensize"
 ext.revision = 'git rev-list --count HEAD'.execute().text.trim()
 version = "1.11-1.2.0-${revision}"
 
 sourceCompatibility = targetCompatibility = "1.8"
 
 minecraft {
-	version = "1.11-13.19.1.2189"
+	version = "1.11-13.19.1.2198"
 	runDir = "run"
-	mappings = "snapshot_20161217"
+	mappings = "snapshot_20161221"
 }
 
 dependencies {
