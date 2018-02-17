@@ -1,12 +1,12 @@
 [
 {
   "modid": "screensize",
-  "name": "Screen-Size",
-  "description": "Screen-Size is a Minecraft mod that adds a GUI to change the screen size (resolution of the game) for both windowed and full screen modes.",
+  "name": "Screen Size",
+  "description": "Screen Size is a Minecraft mod that adds a GUI to change the screen size (resolution of the game) for both windowed and full screen modes.",
   "version": "1.2.0",
-  "mcversion": "1.11",
-  "url": "http://genuine.ninja/screen-size/",
-  "updateUrl": "http://genuine.ninja/screen-size/update.json",
+  "mcversion": "1.12.2",
+  "url": "http://genuine.ninja/screensize/",
+  "updateUrl": "http://genuine.ninja/screensize/update.json",
   "authorList": ["GenuineSounds"],
   "credits": "",
   "logoFile": "assets/screensize/logo.png",

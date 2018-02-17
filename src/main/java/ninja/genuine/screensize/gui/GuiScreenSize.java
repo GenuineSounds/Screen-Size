@@ -79,11 +79,11 @@ public class GuiScreenSize extends GuiScreen {
 	public void drawScreen(final int par1, final int par2, final float par3) {
 		screenSize = Integer.toString(Display.getWidth()) + "x" + Integer.toString(Display.getHeight());
 		drawDefaultBackground();
-		drawCenteredString(fontRendererObj, "Set Screen Size", width / 2, height / 4 - 60 + 20, 16777215);
+		drawCenteredString(fontRenderer, "Set Screen Size", width / 2, height / 4 - 60 + 20, 16777215);
 		final String string = "Enter new size - Like: 1280x720 or 1920*1080";
-		drawString(fontRendererObj, string, width / 2 - fontRendererObj.getStringWidth(string) / 2, height / 4 - 15, 10526880);
-		drawString(fontRendererObj, errorMessage1, width / 2 - 100, height / 4 + 27, 10526880);
-		drawString(fontRendererObj, errorMessage2, width / 2 - 100, height / 4 + 47, 10526880);
+		drawString(fontRenderer, string, width / 2 - fontRenderer.getStringWidth(string) / 2, height / 4 - 15, 10526880);
+		drawString(fontRenderer, errorMessage1, width / 2 - 100, height / 4 + 27, 10526880);
+		drawString(fontRenderer, errorMessage2, width / 2 - 100, height / 4 + 47, 10526880);
 		theGuiTextField.drawTextBox();
 		super.drawScreen(par1, par2, par3);
 	}
@@ -131,7 +131,7 @@ public class GuiScreenSize extends GuiScreen {
 		buttonList.add(cancel);
 		buttonList.add(done);
 		buttonList.add(max);
-		theGuiTextField = new GuiTextField(3, fontRendererObj, width / 2 - 100, height / 4, 200, 20);
+		theGuiTextField = new GuiTextField(3, fontRenderer, width / 2 - 100, height / 4, 200, 20);
 		theGuiTextField.setText(screenSize);
 		theGuiTextField.setTextColor(0x555555);
 	}
